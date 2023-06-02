@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\FuneralController;
+use App\Http\Controllers\FuneralsController;
+use App\Models\Funerals;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::controller(FuneralController::class)->group(function () {
+    Route::get('/dash', 'index')->name('dashboard.index');
+    Route::get('/dash/new', 'new')->name('dashboard.new');
+    Route::get('/dash/show/{id}', 'show')->name('dashboard.show');
 });
