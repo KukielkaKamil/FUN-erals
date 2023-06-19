@@ -37,22 +37,22 @@
                     <a class="nav-link"  href="#">Analytics</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link"  href="#">Workers</a>
+                    <a class="nav-link"  href="{{route('dashboard.users')}}">Workers</a>
                   </li>
-                  <li class="nav-item"  href="#">
-                    <a class="nav-link">Offer</a>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('dashboard.offers')}}">Offer</a>
                   </li>
                 </ul>
                 <div class="d-flex" role="search">
                   <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                                <i class="fas fa-user"></i> admin
+                                <i class="fas fa-user"></i> {{ Auth::user()->name }}
                             </button>
                     <div class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="triggerId">
                         <a class="dropdown-item" href="#">Settings</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}">Log out</a>
                     </div>
                   </div>
                 </div>

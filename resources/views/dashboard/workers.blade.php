@@ -10,20 +10,20 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Duration</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Salary</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-            @forelse ($offers as $o)
+            @forelse ($workers as $w)
               <tr>
-                <th scope="row">{{$o->id}}</th>
-                <td>{{$o->name}}</td>
-                <td>{{strlen($o->description) > 30 ? substr($o->description,0,30).'...' : $o->description;}}</td>
-                <td>{{$o->price}}</td>
-                <td>{{$o->duration}}</td>
+                <th scope="row">{{$w->id}}</th>
+                <td>{{$w->name}}</td>
+                <td>{{$w->surname}}</td>
+                <td>{{$w->phone_number}}</td>
+                <td>{{$w->salary}}</td>
                 <td><button type="button" class="btn btn-success disabled">Edit</button></td>
               </tr>
               @empty

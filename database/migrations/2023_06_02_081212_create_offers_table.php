@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name',80)->nullable(false);
             $table->text('description');
             $table->time('duration');
-            $table->integer('price')->nullable(false);
+            $table->decimal('price')->nullable(false);
         });
     }
 

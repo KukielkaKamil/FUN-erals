@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FuneralController;
-use App\Http\Controllers\FuneralsController;
-use App\Models\Funerals;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/login', function () {
-    return view('login');
+
+Route::group(['middleware' => 'auth'], function () {
+Route::controller(FuneralController::class)->group(function () {
+    Route::get('/dash/funerals', 'index')->name('dashboard.index');
+    Route::get('/dash/new', 'new')->name('dashboard.new');
+    Route::get('/dash/funerals/{id}/edit', 'edit')->name('edit.funeral');
+    Route::put('/dash/funerals/{id}', 'update')->name('update.funeral');
+    Route::get('dash/new/{id}/edit', 'editNew')->name('edit.new');
 });
 
-Route::controller(FuneralController::class)->group(function () {
-    Route::get('/dash', 'index')->name('dashboard.index');
-    Route::get('/dash/new', 'new')->name('dashboard.new');
-    Route::get('/dash/show/{id}', 'show')->name('dashboard.show');
+
+Route::get('/dash/workers', [UserController::class, 'index'])->name('dashboard.users');
+
+Route::get('/dash/offers', [OfferController::class, 'index'])->name('dashboard.offers');
+});
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/auth/login', 'login')->name('login');
+    Route::post('/auth/login', 'authenticate')->name('login.authenticate');
+    Route::get('/auth/logout', 'logout')->name('logout');
 });

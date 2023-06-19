@@ -23,6 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'surname',
+        'phone_number',
+        'salary'
     ];
 
     /**
@@ -46,6 +49,30 @@ class User extends Authenticatable
     ];
 
     public function funeral(): BelongsToMany{
-        return $this->belongsToMany(Funeral::class);
+        return $this->belongsToMany(Funeral::class,'users_funerals', 'user_id','funeral_id');
     }
+
+    public function isOccupied(){
+        $funerals = $this->funeral;
+
+        foreach($funerals as $funeral){
+            $occupied = false;
+            if (strcmp($funeral->getStatus(),'in progress') == 0){
+                $occupied = true;
+            }
+        }
+        if($occupied){
+            return true;
+        }
+        else{
+            return false;
+        }
+        // $worker->funeral->every( function($funeral){
+        //     if (strcmp($funeral->getStatus(),'in progress') == 0){
+        //         return true;
+        //     }
+        //     else{
+        //         return false;
+        //     }}
+     }
 }
