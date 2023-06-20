@@ -40,16 +40,24 @@ class FuneralController extends Controller
  }
 
  public function update(UpdateFuneralRequest $request, $id){
+    $funeral = Funeral::findOrFail($id);
+    $selectedWorkers = $request->input('workers',[]);
+    $workers = User::whereIn('id',$selectedWorkers)->get();
+
     $date = $request->input('date');
     $time = $request->input('time');
 
     $timestamp = $date . ' ' . $time;
 
-    $funeral = Funeral::findOrFail($id);
+    foreach($workers as $w){
+        if($w->isOccupied($funeral,$timestamp)){
+            return redirect()->back()->withErrors(['error' => 'Some of the selected workers are occupied at that time']);
+        }
+    }
+
     $funeral ->date = $timestamp;
     $funeral -> cost = $request->input('cost');
     $funeral->offer_id = $request->input('offer_id');
-    $selectedWorkers = $request->input('workers',[]);
     $funeral->user()->sync($selectedWorkers);
     $funeral -> save();
     return redirect()->route('dashboard.index');

@@ -3,9 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -52,27 +53,19 @@ class User extends Authenticatable
         return $this->belongsToMany(Funeral::class,'users_funerals', 'user_id','funeral_id');
     }
 
-    public function isOccupied(){
+    public function isOccupied(Funeral $f,$sdate = null){
+        $sdate = $sdate ?? $f->date;
+        $edate = $f->getEndDate($sdate);
+        $id= $f->id;
         $funerals = $this->funeral;
-
+        $occupied = false;
         foreach($funerals as $funeral){
-            $occupied = false;
-            if (strcmp($funeral->getStatus(),'in progress') == 0){
+            if($funeral->id == $id) continue;
+            if ($funeral->isOverlaping($sdate,$edate)){
                 $occupied = true;
+                break;
             }
         }
-        if($occupied){
-            return true;
-        }
-        else{
-            return false;
-        }
-        // $worker->funeral->every( function($funeral){
-        //     if (strcmp($funeral->getStatus(),'in progress') == 0){
-        //         return true;
-        //     }
-        //     else{
-        //         return false;
-        //     }}
+        return $occupied;
      }
 }

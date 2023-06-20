@@ -21,17 +21,21 @@
                         <tbody>
                             @php($states = ['done' => 'success', 'in progress' => 'warning', 'prepared' => 'primary'])
                             @forelse ($funerals as $f)
-                            @php($status = $f->getStatus())
+                                @php($status = $f->getStatus())
                                 <tr>
                                     <th scope="row">{{ $f->id }}</th>
                                     <td>{{ \Carbon\Carbon::parse($f->date)->format('Y-m-d') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($f->date)->format('H:i') }}</td>
-                                    <td><span class={{ 'text-'.$states[$status] }}>{{$status}}</span></td>
+                                    <td><span class={{ 'text-' . $states[$status] }}>{{ $status }}</span></td>
                                     <td>{{ $f->cost }}</td>
                                     <td>{{ $f->offer->name }}</td>
                                     <td>{{ $f->client->name . ' ' . $f->client->surname }}</td>
-                                    <td><a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"
-                                                class="btn btn-secondary disabled">Edit</button></a></td>
+                                    <td>
+                                        {{-- @if (strcmp($status, 'in progress') != 0) --}}
+                                            <a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"
+                                                    class="btn btn-secondary disabled">Edit</button></a>
+                                        {{-- @endif --}}
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

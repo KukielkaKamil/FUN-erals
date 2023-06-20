@@ -30,18 +30,37 @@ class Funeral extends Model
     {
         $now = Carbon::now();
         $start = Carbon::parse($this->date);
-        $end = Carbon::parse($this->date);
-        $time = Carbon::createFromFormat('H:i:s', $this->offer->duration);
-        $end->addHours($time->format('H'));
-        $end->addMinutes($time->format('i'));
-        $end->addSeconds($time->format('s'));
+        $end = $this->getEndDate();
 
-        if ($now->greaterThan($end)) {
+        if ($now->isAfter($end)) {
             return 'done';
-        } else if ($now->lessThan($start)) {
+        } else if ($now->isBefore($start)) {
             return 'prepared';
         } else {
             return 'in progress';
         }
+    }
+
+    public function getEndDate($date = null) {
+        if($date == null){
+        $end = Carbon::parse($this->date);
+        }
+        else{
+            $end = Carbon::parse($date);
+        }
+        $time = Carbon::createFromFormat('H:i:s', $this->offer->duration);
+        $end->addHours($time->format('H'));
+        $end->addMinutes($time->format('i'));
+        $end->addSeconds($time->format('s'));
+        return $end;
+    }
+
+    public function isOverlaping($start1, $end1){
+        $start1=Carbon::parse($start1);
+        $end1=Carbon::parse($end1);
+        $start2=Carbon::parse($this->date);
+        $end2 = $this->getEndDate();
+
+        return($start1->lessThanOrEqualTo($end2)) && ($end1->greaterThanOrEqualTo($start2));
     }
 }
