@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateNewRequest extends FormRequest
+class UpdateClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +22,11 @@ class UpdateNewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'workers' => [
-                'required',
-                'array',
-                Rule::exists('users', 'id'),
-            ],
+            'name' => 'required|string|',
+            'surname'=>'required|string',
+            'pesel' => 'required|string|min:11|max:11',
+            'email' => 'required|email',
+            'phone_number' => 'required|string|min:9|max:9',
         ];
     }
 }

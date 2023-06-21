@@ -9,7 +9,6 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         </div>
                     @endif
-                    <h1>Accept new funeral</h1>
 
                     @if ($errors->any())
                         <div class="row d-flex justify-content-center">
@@ -26,27 +25,17 @@
                     @endif
                     <div class="container">
                         <div class="row border border-2">
-                            <h3>Funeral data</h3>
+                            <h3>Client data</h3>
                             <hr>
                             <div class="col">
-                                <p><b>Client:</b>{{ $funeral->client->name . ' ' . $funeral->client->surname }}</p>
-                                <p><b>Date:</b> {{ $funeral->date }}</p>
-                                <p><b>Duration:</b> {{ $funeral->offer->duration }}</p>
-                                <p><b>Offer:</b> {{ $funeral->offer->name }}</p>
-                                <p><b>Cost:</b> {{ $funeral->cost }}</p>
-                                <p><b>E-mail:</b> {{ $funeral->client->email }}</p>
-                                <p><b>Phone number:</b> {{ $funeral->client->phone_number }}</p>
+                                <p><b>Client:</b> {{ $client->name . ' ' . $client->surname }}</p>
+                                <p><b>PESEL:</b> {{ $client->pesel }}</p>
+                                <p><b>Phone number:</b> {{ $client->phone_number }}</p>
+                                <p><b>E-mail:</b> {{ $client->email}}</p>
                             </div>
                         </div>
-
-                        <form method="POST" action="{{ route('update.new', $funeral->id) }}" class="needs-validation">
-                            @csrf
-                            @method('PATCH')
-                            @include('shared.select-user')
-                            <div class="mt-1">
-                                <button type="submit" class="btn btn-primary">Accept Funeral</button>
-                            </div>
-                        </form>
+                        <a href={{ url()->previous() }}><button type="button"
+                        class="btn btn-primary disabled mt-2">Back</button></a>
                     </div>
                 </div>
             </div>

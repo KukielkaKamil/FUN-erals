@@ -2,7 +2,7 @@
 @section('content')
     <div class="container mt-3">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="container mt-5 mb-5">
                     @if (session('error'))
                         <div class="row d-flex justify-content-center">
@@ -25,37 +25,34 @@
                         </div>
                     @endif
                     <div class="container">
-                        <form method="POST" action="{{ route('update.funeral', $funeral->id) }}" class="needs-validation">
+                        <form method="POST" action="{{ route('update.client', $client->id) }}" class="needs-validation">
                             @csrf
-                            @method('PATCH')
+                            @method('PUT')
                             <div class="mb-3">
-                                <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control" name="date" id="date"
-                                    aria-describedby="dateHelp"
-                                    value="{{ \Carbon\Carbon::parse($funeral->date)->format('Y-m-d') }}">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="name"
+                                    value="{{ $client->name }}">
                             </div>
                             <div class="mb-3">
-                                <label for="time" class="form-label">Time</label>
-                                <input type="time" class="form-control" name="time" id="time"
-                                    value="{{ \Carbon\Carbon::parse($funeral->date)->format('H:i') }}">
+                                <label for="surname" class="form-label">Surname</label>
+                                <input type="text" class="form-control" name="surname" id="surname"
+                                    value="{{ $client->surname }}">
                             </div>
                             <div class="mb-3">
-                                <label for="cost" class="form-label">Cost</label>
-                                <input type="number" step=".01" class="form-control" name="cost" id="cost"
-                                    value={{ $funeral->cost }}>
+                                <label for="pesel" class="form-label">Pesel</label>
+                                <input type="number" class="form-control" name="pesel" id="pesel"
+                                    value="{{ $client->pesel }}">
                             </div>
                             <div class="mb-3">
-                                <label for="offer_id" class="form-label">Offer</label>
-                                <select class="form-select" name="offer_id" id="offer_id">
-                                    @forelse ($offers as $offer)
-                                        <option @if ($funeral->offer->id == $offer->id) selected @endif value={{ $offer->id }}>
-                                            {{ $offer->name }}</option>
-                                    @empty
-                                        <option value='0'>There are no offerts</option>
-                                    @endforelse
-                                </select>
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" name="email" id="emial"
+                                    value="{{ $client->email }}">
                             </div>
-                            @include('shared.select-user')
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label">Phone number</label>
+                                <input type="number" class="form-control" name="phone_number" id="phone_number"
+                                    value={{ $client->phone_number }}>
+                            </div>
                             <div class="mt-1">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

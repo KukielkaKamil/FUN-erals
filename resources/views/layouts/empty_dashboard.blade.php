@@ -37,10 +37,13 @@
                     <a class="nav-link"  href="#">Analytics</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link"  href="{{route('dashboard.users')}}">Workers</a>
+                    <a class="nav-link"  href="{{route('dashboard.workers')}}">Workers</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard.offers')}}">Offer</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('dashboard.clients')}}">Clients</a>
                   </li>
                 </ul>
                 <div class="d-flex" role="search">

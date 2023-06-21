@@ -23,8 +23,11 @@
                 <td>{{$o->name}}</td>
                 <td>{{strlen($o->description) > 30 ? substr($o->description,0,30).'...' : $o->description;}}</td>
                 <td>{{$o->price}}</td>
-                <td>{{$o->duration}}</td>
-                <td><button type="button" class="btn btn-success disabled">Edit</button></td>
+                <td>{{ \Carbon\Carbon::parse($o->duration)->format('H:i') }}</td>
+                <td>
+                    <a href={{ route('edit.offer', ['id' => $o->id]) }}><button type="button"
+                        class="btn btn-secondary disabled">Edit</button></a>
+                </td>
               </tr>
               @empty
               <tr>

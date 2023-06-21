@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FuneralController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserController;
@@ -26,14 +27,30 @@ Route::controller(FuneralController::class)->group(function () {
     Route::get('/dash/funerals', 'index')->name('dashboard.index');
     Route::get('/dash/new', 'new')->name('dashboard.new');
     Route::get('/dash/funerals/{id}/edit', 'edit')->name('edit.funeral');
-    Route::put('/dash/funerals/{id}', 'update')->name('update.funeral');
+    Route::patch('/dash/funerals/{id}', 'update')->name('update.funeral');
     Route::get('dash/new/{id}/edit', 'editNew')->name('edit.new');
+    Route::patch('dash/new/{id}', 'updateNew')->name('update.new');
 });
 
+Route::controller(UserController::class)->group(function () {
+    Route::get('/dash/workers', 'index')->name('dashboard.workers');
+    Route::get('/dash/workers/{id}/edit', 'edit')->name('edit.worker');
+    Route::patch('/dash/workers/{id}', 'update')->name('update.worker');
 
-Route::get('/dash/workers', [UserController::class, 'index'])->name('dashboard.users');
+});
+Route::controller(OfferController::class)->group(function () {
+    Route::get('/dash/offers', 'index')->name('dashboard.offers');
+    Route::get('/dash/offers/{id}/edit.', 'edit')->name('edit.offer');
+    Route::put('/dash/offers/{id}', 'update')->name('update.offer');
 
-Route::get('/dash/offers', [OfferController::class, 'index'])->name('dashboard.offers');
+});
+Route::controller(ClientController::class)->group(function () {
+    Route::get('/dash/clients', 'index')->name('dashboard.clients');
+    Route::get('/dash/clients/{id}/show', 'show')->name('show.client');
+    Route::get('/dash/clients/{id}/edit', 'edit')->name('edit.client');
+    Route::put('/dash/clients/{id}', 'update')->name('update.client');
+});
+
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/login', 'login')->name('login');

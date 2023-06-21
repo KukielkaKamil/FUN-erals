@@ -21,7 +21,8 @@
                             @forelse ($funerals as $f)
                                 <tr>
                                     <th scope="row">{{ $f->id }}</th>
-                                    <td>{{ $f->client->name . ' ' . $f->client->surname }}</td>
+                                    <td><a href={{route('show.client',['id' => $f->client->id])}}>
+                                        {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
                                     <td>{{ $f->offer->name }}</td>
                                     <td>{{ $f->cost }}</td>
                                     <td>{{ $f->offer->duration }}</td>

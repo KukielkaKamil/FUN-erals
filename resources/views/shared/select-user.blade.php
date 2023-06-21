@@ -1,6 +1,6 @@
-<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+<button class="btn btn-primary mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
     aria-expanded="false" aria-controls="collapseExample">
-    Select workers
+    Select workers <i class="fa fa-caret-down"></i>
 </button>
 <div class="collapse" id="collapseExample">
     <div class="card card-body">

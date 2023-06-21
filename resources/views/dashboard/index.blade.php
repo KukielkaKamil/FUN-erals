@@ -29,7 +29,8 @@
                                     <td><span class={{ 'text-' . $states[$status] }}>{{ $status }}</span></td>
                                     <td>{{ $f->cost }}</td>
                                     <td>{{ $f->offer->name }}</td>
-                                    <td>{{ $f->client->name . ' ' . $f->client->surname }}</td>
+                                    <td><a href={{route('show.client',['id' => $f->client->id])}}>
+                                        {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
                                     <td>
                                         {{-- @if (strcmp($status, 'in progress') != 0) --}}
                                             <a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"

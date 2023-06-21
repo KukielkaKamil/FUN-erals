@@ -25,7 +25,7 @@ class UpdateFuneralRequest extends FormRequest
     {
         return [
             'date' => 'required|date',
-            'time' => 'required',
+            'time' => 'required|date_format:H:i',
             'cost' => 'required|decimal:2',
             'offer_id' => [
                 'required',

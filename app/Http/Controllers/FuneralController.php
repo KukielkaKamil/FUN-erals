@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateFuneralRequest;
+use App\Http\Requests\UpdateNewRequest;
 use App\Models\Funeral;
 use App\Models\Offer;
 use App\Models\Status;
@@ -34,9 +35,8 @@ class FuneralController extends Controller
  }
  public function editNew($id)
  {
-    $offers = Offer::all();
-    $workers = User::all();
-    return view('dashboard.edit.new', ['funeral' => Funeral::findOrFail($id),'offers' => $offers,'workers' => $workers]);
+    $workers = User::all()->except(1);
+    return view('dashboard.edit.new', ['funeral' => Funeral::findOrFail($id),'workers' => $workers]);
  }
 
  public function update(UpdateFuneralRequest $request, $id){
@@ -61,5 +61,25 @@ class FuneralController extends Controller
     $funeral->user()->sync($selectedWorkers);
     $funeral -> save();
     return redirect()->route('dashboard.index');
+ }
+
+ public function updateNew(UpdateNewRequest $request, $id){
+    $funeral = Funeral::findOrFail($id);
+    $selectedWorkers = $request->input('workers',[]);
+    $workers = User::whereIn('id',$selectedWorkers)->get();
+
+    $date = $funeral->date;
+
+    foreach($workers as $w){
+        if($w->isOccupied($funeral,$date)){
+            return redirect()->back()->withErrors(['error' => 'Some of the selected workers are occupied at that time']);
+        }
+    }
+
+    $funeral->user()->sync($selectedWorkers);
+    $funeral->accepted = true;
+    $funeral->save();
+    return redirect()->route('dashboard.index');
+
  }
 }
