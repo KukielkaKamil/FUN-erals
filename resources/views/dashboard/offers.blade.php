@@ -28,6 +28,13 @@
                     <a href={{ route('edit.offer', ['id' => $o->id]) }}><button type="button"
                         class="btn btn-secondary disabled">Edit</button></a>
                 </td>
+                <td>
+                    <form method="POST" action="{{ route('destroy.offer', $o->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger " value="Delete"></button>
+                    </form>
+                </td>
               </tr>
               @empty
               <tr>

@@ -23,7 +23,7 @@ class Funeral extends Model
     }
     public function user(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'users_funerals', 'funeral_id', 'user_id');
+        return $this->belongsToMany(User::class, 'funeral_user', 'funeral_id', 'user_id');
     }
 
     public function getStatus()

@@ -28,6 +28,13 @@
                     <a href={{ route('edit.worker', ['id' => $w->id]) }}><button type="button"
                     class="btn btn-secondary disabled">Edit</button></a>
                 </td>
+                <td>
+                    <form method="POST" action="{{ route('destroy.worker', $w->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger " value="Delete"></button>
+                    </form>
+                </td>
               </tr>
               @empty
               <tr>

@@ -23,4 +23,8 @@ class UserController extends Controller
     User::find($id)->update($input);
     return redirect()->route('dashboard.workers');
  }
+ public function destroy($id){
+    User::findOrFail($id)->delete();
+    return redirect()->back();
+ }
 }

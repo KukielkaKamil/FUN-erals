@@ -50,7 +50,7 @@ class User extends Authenticatable
     ];
 
     public function funeral(): BelongsToMany{
-        return $this->belongsToMany(Funeral::class,'users_funerals', 'user_id','funeral_id');
+        return $this->belongsToMany(Funeral::class,'funeral_user', 'user_id','funeral_id');
     }
 
     public function isOccupied(Funeral $f,$sdate = null){

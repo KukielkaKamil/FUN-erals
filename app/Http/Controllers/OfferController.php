@@ -23,4 +23,8 @@ class OfferController extends Controller
     Offer::find($id)->update($input);
     return redirect()->route('dashboard.offers');
  }
+ public function destroy($id){
+    Offer::findOrFail($id)->delete();
+    return redirect()->back();
+ }
 }

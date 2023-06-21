@@ -29,6 +29,13 @@
                                     <td>{{ $f->client->email }}</td>
                                     <td><a href={{ route('edit.new', ['id' => $f->id]) }}>
                                         <button type="button" class="btn btn-success">Accept</button></td>
+                                        <td>
+                                            <form method="POST" action="{{ route('destroy.funeral', $f->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" class="btn btn-danger " value="Delete"></button>
+                                            </form>
+                                        </td>
                                 </tr>
                             @empty
                                 <tr>

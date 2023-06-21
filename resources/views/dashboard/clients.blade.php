@@ -35,6 +35,13 @@
                     <a href={{ route('show.client', ['id' => $c->id]) }}><button type="button"
                         class="btn btn-secondary disabled">Show</button></a>
                 </td>
+                <td>
+                    <form method="POST" action="{{ route('destroy.client', $c->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger " value="Delete"></button>
+                    </form>
+                </td>
               </tr>
               @empty
               <tr>

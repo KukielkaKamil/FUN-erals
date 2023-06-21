@@ -34,8 +34,15 @@
                                     <td>
                                         {{-- @if (strcmp($status, 'in progress') != 0) --}}
                                             <a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"
-                                                    class="btn btn-secondary disabled">Edit</button></a>
+                                                    class="btn btn-secondary">Edit</button></a>
                                         {{-- @endif --}}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{{ route('destroy.funeral', $f->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="btn btn-danger" value="Delete"></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

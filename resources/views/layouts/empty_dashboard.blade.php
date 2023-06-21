@@ -34,9 +34,6 @@
                     <a class="nav-link" href="{{route('dashboard.new')}}">New submissions</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link"  href="#">Analytics</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link"  href="{{route('dashboard.workers')}}">Workers</a>
                   </li>
                   <li class="nav-item">

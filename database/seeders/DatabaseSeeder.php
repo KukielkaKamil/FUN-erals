@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             OfferSeeder::class,
             UserSeeder::class,
             FuneralSeeder::class,
-            UserFuneralsSeeder::class
+            FuneralUserSeeder::class
         ]);
     }
 }

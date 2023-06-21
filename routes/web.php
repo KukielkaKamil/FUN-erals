@@ -30,18 +30,21 @@ Route::controller(FuneralController::class)->group(function () {
     Route::patch('/dash/funerals/{id}', 'update')->name('update.funeral');
     Route::get('dash/new/{id}/edit', 'editNew')->name('edit.new');
     Route::patch('dash/new/{id}', 'updateNew')->name('update.new');
+    Route::delete('/dash/funerals/{id}','destroy')->name('destroy.funeral');
 });
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/dash/workers', 'index')->name('dashboard.workers');
     Route::get('/dash/workers/{id}/edit', 'edit')->name('edit.worker');
     Route::patch('/dash/workers/{id}', 'update')->name('update.worker');
+    Route::delete('/dash/workers/{id}','destroy')->name('destroy.worker');
 
 });
 Route::controller(OfferController::class)->group(function () {
     Route::get('/dash/offers', 'index')->name('dashboard.offers');
     Route::get('/dash/offers/{id}/edit.', 'edit')->name('edit.offer');
     Route::put('/dash/offers/{id}', 'update')->name('update.offer');
+    Route::delete('/dash/offers/{id}','destroy')->name('destroy.offer');
 
 });
 Route::controller(ClientController::class)->group(function () {
@@ -49,6 +52,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/dash/clients/{id}/show', 'show')->name('show.client');
     Route::get('/dash/clients/{id}/edit', 'edit')->name('edit.client');
     Route::put('/dash/clients/{id}', 'update')->name('update.client');
+    Route::delete('/dash/clients/{id}','destroy')->name('destroy.client');
 });
 
 });

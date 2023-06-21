@@ -6,14 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UserFuneralsSeeder extends Seeder
+class FuneralUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('users_funerals') -> insert([
+        DB::table('funeral_user') -> insert([
             ['user_id' => 1, 'funeral_id' =>1],
             ['user_id' => 2, 'funeral_id' =>1],
             ['user_id' => 3, 'funeral_id' =>2],

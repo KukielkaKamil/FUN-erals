@@ -82,4 +82,9 @@ class FuneralController extends Controller
     return redirect()->route('dashboard.index');
 
  }
+
+ public function destroy($id){
+    Funeral::findOrFail($id)->delete();
+    return redirect()->back();
+ }
 }

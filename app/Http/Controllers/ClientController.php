@@ -26,4 +26,8 @@ class ClientController extends Controller
         Client::find($id)->update($input);
         return redirect()->route('dashboard.clients');
      }
+     public function destroy($id){
+        Client::findOrFail($id)->delete();
+        return redirect()->back();
+     }
 }
