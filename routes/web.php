@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FuneralController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserController;
+use App\Models\Offer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-});
+    $offers = Offer::all();
+    return view('home',['offers' => $offers]);
+})->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 Route::controller(FuneralController::class)->group(function () {
@@ -64,3 +66,4 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'authenticate')->name('login.authenticate');
     Route::get('/auth/logout', 'logout')->name('logout');
 });
+Route::post('/store', [ClientController::class,'addNewFuneral'])->name('store.order');

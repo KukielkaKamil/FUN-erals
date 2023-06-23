@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddNewFuneralRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -29,5 +30,17 @@ class ClientController extends Controller
      public function destroy($id){
         Client::findOrFail($id)->delete();
         return redirect()->back();
+     }
+
+     public function addNewFuneral(AddNewFuneralRequest $request){
+        $input = $request->all();
+        $client = new Client;
+        $client->name = $request->input('name');
+        $client->surname = $request->input('surname');
+        $client->pesel = $request->input('pesel');
+        $client->email = $request->input('email');
+        $client->phone_number = $request->input('phone_number');
+        $client->save();
+        return redirect()->route('home');
      }
 }
