@@ -25,7 +25,21 @@ class UpdateOfferRequest extends FormRequest
             'name' => 'required|string|max:80',
             'description' => 'required|string',
             'duration' =>'required|date_format:H:i',
-            'price' => 'required|decimal:2'
+            'price' => [
+                'required',
+                'regex:/^\d+(\.\d{1,2})?$/',
+                function ($attribute, $value, $fail) {
+                    $formattedValue = number_format((float)$value, 2, '.', '');
+
+                    if (strpos($formattedValue, '.') === false) {
+                        $formattedValue .= '.00';
+                    }
+
+                    if ($value != $formattedValue) {
+                        $fail('The '.$attribute.' field must be a decimal number or inteager');
+                    }
+                }
+            ],
         ];
     }
 }

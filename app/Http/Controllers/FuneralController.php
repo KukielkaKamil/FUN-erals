@@ -10,37 +10,65 @@ use App\Models\Status;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
 
 class FuneralController extends Controller
 {
     public function index()
  {
+    $this->authorize('viewAny', Funeral::class);
+    $user = Auth::user();
+    if($user->id == 1){
     $funerals = Funeral::whereNotIn('accepted',array('0'))->get();
     return view('dashboard.index', ['funerals' => $funerals]);
+    }
+    else{
+        $user_id = $user->id;
+        $funerals = Funeral::whereHas('user', function ($query) use ($user_id) {
+            $query->where('id', $user_id);
+        })->orderBy('date', 'asc')->get();
+        return view('worker.index', ['funerals' => $funerals]);
+    }
  }
 
  public function new()
  {
+    $this->authorize('viewAny', Funeral::class);
     $funerals = Funeral::whereIn('accepted',array('0'))->get();;
     return view('dashboard.new', ['funerals' => $funerals]);
+ }
+ public function history(){
+    $this->authorize('viewAny', Funeral::class);
+    $user = Auth::user();
+    $user_id = $user->id;
+        $funerals = Funeral::whereHas('user', function ($query) use ($user_id) {
+            $query->where('id', $user_id);
+        })->whereNotIn('accepted',array('0'))->get();
+        return view('worker.history', ['funerals' => $funerals]);
+
  }
 
  public function edit($id)
  {
+    $funeral = Funeral::findOrFail($id);
+    $this->authorize('update', $funeral);
     $offers = Offer::all();
     $workers = User::all()->except(1);
 
-    return view('dashboard.edit.funeral', ['funeral' => Funeral::findOrFail($id),'offers' => $offers,'workers' => $workers]);
+    return view('dashboard.edit.funeral', ['funeral' => $funeral,'offers' => $offers,'workers' => $workers]);
  }
  public function editNew($id)
  {
+    $funeral = Funeral::findOrFail($id);
+    $this->authorize('update', $funeral);
     $workers = User::all()->except(1);
-    return view('dashboard.edit.new', ['funeral' => Funeral::findOrFail($id),'workers' => $workers]);
+    return view('dashboard.edit.new', ['funeral' => $funeral,'workers' => $workers]);
  }
 
  public function update(UpdateFuneralRequest $request, $id){
     $funeral = Funeral::findOrFail($id);
+    $this->authorize('update', $funeral);
     $selectedWorkers = $request->input('workers',[]);
     $workers = User::whereIn('id',$selectedWorkers)->get();
 
@@ -65,6 +93,7 @@ class FuneralController extends Controller
 
  public function updateNew(UpdateNewRequest $request, $id){
     $funeral = Funeral::findOrFail($id);
+    $this->authorize('update', $funeral);
     $selectedWorkers = $request->input('workers',[]);
     $workers = User::whereIn('id',$selectedWorkers)->get();
 
@@ -84,7 +113,11 @@ class FuneralController extends Controller
  }
 
  public function destroy($id){
-    Funeral::findOrFail($id)->delete();
+    $funeral = Funeral::findOrFail($id);
+    $this->authorize('delete', $funeral);
+    $this->authorize('update', $funeral);
+    $this->authorize('delete', $funeral);
+    $funeral->delete();
     return redirect()->back();
  }
 }

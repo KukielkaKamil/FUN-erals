@@ -32,21 +32,21 @@
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" class="form-control" name="date" id="date"
                                     aria-describedby="dateHelp"
-                                    value="{{ \Carbon\Carbon::parse($funeral->date)->format('Y-m-d') }}">
+                                    value="{{ \Carbon\Carbon::parse($funeral->date)->format('Y-m-d') }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="time" class="form-label">Time</label>
                                 <input type="time" class="form-control" name="time" id="time"
-                                    value="{{ \Carbon\Carbon::parse($funeral->date)->format('H:i') }}">
+                                    value="{{ \Carbon\Carbon::parse($funeral->date)->format('H:i') }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="cost" class="form-label">Cost</label>
                                 <input type="number" step=".01" class="form-control" name="cost" id="cost"
-                                    value={{ $funeral->cost }}>
+                                    value={{ $funeral->cost }} required>
                             </div>
                             <div class="mb-3">
                                 <label for="offer_id" class="form-label">Offer</label>
-                                <select class="form-select" name="offer_id" id="offer_id">
+                                <select class="form-select" name="offer_id" id="offer_id" required>
                                     @forelse ($offers as $offer)
                                         <option @if ($funeral->offer->id == $offer->id) selected @endif value={{ $offer->id }}>
                                             {{ $offer->name }}</option>

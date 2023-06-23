@@ -31,6 +31,9 @@ Route::controller(FuneralController::class)->group(function () {
     Route::get('dash/new/{id}/edit', 'editNew')->name('edit.new');
     Route::patch('dash/new/{id}', 'updateNew')->name('update.new');
     Route::delete('/dash/funerals/{id}','destroy')->name('destroy.funeral');
+
+    Route::get('/worker/funerals', 'index')->name('worker.index');
+    Route::get('/worker/history', 'history')->name('worker.history');
 });
 
 Route::controller(UserController::class)->group(function () {

@@ -26,7 +26,21 @@ class UpdateFuneralRequest extends FormRequest
         return [
             'date' => 'required|date',
             'time' => 'required|date_format:H:i',
-            'cost' => 'required|decimal:2',
+            'cost' => [
+                'required',
+                'regex:/^\d+(\.\d{1,2})?$/',
+                function ($attribute, $value, $fail) {
+                    $formattedValue = number_format((float)$value, 2, '.', '');
+
+                    if (strpos($formattedValue, '.') === false) {
+                        $formattedValue .= '.00';
+                    }
+
+                    if ($value != $formattedValue) {
+                        $fail('The '.$attribute.' field must be a decimal number or inteager');
+                    }
+                }
+            ],
             'offer_id' => [
                 'required',
                 'integer',

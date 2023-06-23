@@ -31,21 +31,21 @@
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name" id="name"
-                                    value="{{ $offer->name }}">
+                                    value="{{ $offer->name }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="description">Example Textarea</label>
-                                <textarea class="form-control" id="description" name ="description" rows="3">{{$offer->description}}</textarea>
+                                <textarea class="form-control" id="description" name ="description" rows="3" required>{{$offer->description}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="duration" class="form-label">Duration</label>
                                 <input type="time" class="form-control" name="duration" id="duration"
-                                    value="{{ \Carbon\Carbon::parse($offer->duration)->format('H:i') }}">
+                                    value="{{ \Carbon\Carbon::parse($offer->duration)->format('H:i') }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="price" class="form-label">Salary</label>
                                 <input type="number" class="form-control" name="price" id="price"
-                                    value="{{ $offer->price }}">
+                                    value="{{ $offer->price }}" required>
                             </div>
                             <div class="mt-1">
                                 <button type="submit" class="btn btn-primary">Submit</button>

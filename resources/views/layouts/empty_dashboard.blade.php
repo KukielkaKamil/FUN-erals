@@ -21,14 +21,22 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #178834">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#"><i class="fas fa-cross"></i> FUN-erals</a>
+              <a class="navbar-brand" href=
+              @can('is-admin')
+              {{route('dashboard.index')}}
+              @endcan
+              @cannot('is-admin')
+              {{route('worker.index')}}
+              @endcannot
+              ><i class="fas fa-cross"></i> FUN-erals</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @can('is-admin')
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href={{route('dashboard.index')}}>Home</a>
+                    <a class="nav-link" aria-current="page" href={{route('dashboard.index')}}>Funerals</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard.new')}}">New submissions</a>
@@ -42,6 +50,15 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard.clients')}}">Clients</a>
                   </li>
+                  @endcan
+                  @cannot('is-admin')
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('worker.index')}}">Funerals</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('worker.history')}}">History</a>
+                  </li>
+                  @endcannot
                 </ul>
                 <div class="d-flex" role="search">
                   <div class="dropdown">

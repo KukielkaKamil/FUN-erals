@@ -29,7 +29,9 @@
                             <hr>
                             <div class="col">
                                 <p><b>Client:</b> {{ $client->name . ' ' . $client->surname }}</p>
+                                @can('is-admin')
                                 <p><b>PESEL:</b> {{ $client->pesel }}</p>
+                                @endcan
                                 <p><b>Phone number:</b> {{ $client->phone_number }}</p>
                                 <p><b>E-mail:</b> {{ $client->email}}</p>
                             </div>
