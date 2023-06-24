@@ -14,4 +14,7 @@ class Client extends Model
     public function funeral(): HasMany{
         return $this->hasMany(Funeral::class);
     }
+    public function promoCode(): HasMany{
+        return $this->hasMany(PromoCode::class);
+    }
 }

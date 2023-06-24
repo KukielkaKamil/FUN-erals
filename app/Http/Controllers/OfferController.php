@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOfferRequest;
 use App\Http\Requests\UpdateOfferRequest;
 use App\Models\Offer;
 use Illuminate\Http\Request;
@@ -16,6 +17,16 @@ class OfferController extends Controller
  public function edit($id)
  {
     return view('dashboard.edit.offer', ['offer' => Offer::findOrFail($id)]);
+ }
+ public function add()
+ {
+    return view('dashboard.add.offer');
+ }
+
+ public function store(StoreOfferRequest $request){
+    $input = $request->all();
+    Offer::create($input);
+    return redirect()->route('dashboard.offers');
  }
 
  public function update(UpdateOfferRequest $request,$id){

@@ -99,12 +99,14 @@ class FuneralController extends Controller
 
     $date = $funeral->date;
 
+
     foreach($workers as $w){
         if($w->isOccupied($funeral,$date)){
             return redirect()->back()->withErrors(['error' => 'Some of the selected workers are occupied at that time']);
         }
     }
 
+    $funeral->date = $date;
     $funeral->user()->sync($selectedWorkers);
     $funeral->accepted = true;
     $funeral->save();

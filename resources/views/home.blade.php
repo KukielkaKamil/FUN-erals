@@ -70,7 +70,7 @@
         @forelse ($offers as $offer )
         <div class="col-lg-4">
             <div class="card mb-4">
-              <img src="{{ asset('images/'.$offer->id.'.jpg') }}" height="250px" alt="Service 1" class="card-img-top">
+              <img src="{{ asset('images/'.$offer->id.'.jpg') }}" height="250px" alt="Service" class="card-img-top">
               <div class="card-body">
                 <h5 class="card-title">{{$offer->name}}</h5>
                 <p class="card-text">{{$offer->description}}</p>
@@ -83,6 +83,9 @@
         @empty
             <h1>Currently there are no offers</h1>
         @endforelse
+        <div class="text-center">
+            <a href="#"><button type="button" class="btn btn-secondary center">See all offer</button></a>
+        </div>
       </div>
     </div>
   </section>
@@ -118,23 +121,23 @@
             @method('POST')
             <div class="mb-3">
               <label for="name" class="form-label">Your Name</label>
-              <input type="text" class="form-control" id="name" name="name" required>
+              <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" required>
             </div>
             <div class="mb-3">
                 <label for="surname" class="form-label">Your Surname</label>
-                <input type="text" class="form-control" id="surame" name="surname" required>
+                <input type="text" class="form-control" id="surame" name="surname" value="{{old('surname')}}" required>
               </div>
               <div class="mb-3">
                 <label for="pesel" class="form-label">Your PESEL</label>
-                <input type="text" class="form-control" id="pesel" name="pesel" maxlength="11" required>
+                <input type="text" class="form-control" id="pesel" name="pesel" maxlength="11" value="{{old('pesel')}}" required>
               </div>
               <div class="mb-3">
                 <label for="phone_number" class="form-label">Your Number</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number" maxlength="9" required>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" maxlength="9" value="{{old('phone_number')}}" required>
               </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="email" name ="email" required>
+              <input type="email" class="form-control" id="email" name ="email" value="{{old('email')}}" required>
             </div>
             <div class="mb-3">
                 <label for="offer_id" class="form-label">Offer you are interested in</label>
@@ -150,15 +153,15 @@
             <div class="mb-3">
                 <label for="date" class="form-label">Date</label>
                 <input type="date" class="form-control" name="date" id="date"
-                    aria-describedby="dateHelp" required>
+                    aria-describedby="dateHelp" value="{{old('date')}}" required>
             </div>
             <div class="mb-3">
                 <label for="time" class="form-label">Time</label>
-                <input type="time" class="form-control" name="time" id="time" required>
+                <input type="time" class="form-control" name="time" id="time" value="{{old('time')}}" required>
             </div>
             <div class="mb-3">
                 <label for="promo_code" class="form-label">Promo code</label>
-                <input type="text" class="form-control" id="promo_code" name="promo_code">
+                <input type="text" class="form-control" id="promo_code" name="promo_code" value="{{old('promo_code')}}">
               </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

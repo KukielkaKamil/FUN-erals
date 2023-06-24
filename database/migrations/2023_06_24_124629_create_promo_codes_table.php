@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Client;
-use App\Models\Offer;
-use App\Models\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('funerals', function (Blueprint $table) {
+        Schema::create('promo_codes', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('date')->nullable();
-            $table->decimal('cost');
-            $table->boolean('accepted');
-            $table->foreignIdFor(Offer::class)->constrained();
-            $table->foreignIdFor(Client::class)->constrained();
+            $table->string('code',30);
+            $table->decimal('discount',3,2);
+            $table->date('exp_date');
+            $table->foreignIdFor(Client::class)->nullable(true)->onDelete('cascade');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('funerals');
+        Schema::dropIfExists('promo_codes');
     }
 };

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FuneralController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\PromoCodeController;
 use App\Http\Controllers\UserController;
 use App\Models\Offer;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $offers = Offer::all();
+    $offers = Offer::inRandomOrder()->limit(3)->get();
     return view('home',['offers' => $offers]);
 })->name('home');
 
@@ -43,6 +44,8 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/dash/workers/{id}/edit', 'edit')->name('edit.worker');
     Route::patch('/dash/workers/{id}', 'update')->name('update.worker');
     Route::delete('/dash/workers/{id}','destroy')->name('destroy.worker');
+    Route::get('/dash/workers/add', 'add')->name('add.worker');
+    Route::post('/dash/workers/add', 'store')->name('store.worker');
 
 });
 Route::controller(OfferController::class)->group(function () {
@@ -50,6 +53,8 @@ Route::controller(OfferController::class)->group(function () {
     Route::get('/dash/offers/{id}/edit.', 'edit')->name('edit.offer');
     Route::put('/dash/offers/{id}', 'update')->name('update.offer');
     Route::delete('/dash/offers/{id}','destroy')->name('destroy.offer');
+    Route::get('/dash/offers/add', 'add')->name('add.offer');
+    Route::post('/dash/offers/add', 'store')->name('store.offer');
 
 });
 Route::controller(ClientController::class)->group(function () {
@@ -58,6 +63,12 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/dash/clients/{id}/edit', 'edit')->name('edit.client');
     Route::put('/dash/clients/{id}', 'update')->name('update.client');
     Route::delete('/dash/clients/{id}','destroy')->name('destroy.client');
+});
+
+Route::controller(PromoCodeController::class)->group(function () {
+    Route::get('/dash/promocodes', 'index')->name('dashboard.promocodes');
+    Route::get('/dash/promocodes/add', 'add')->name('add.promocode');
+    Route::post('/dash/promocodes/add', 'store')->name('store.promocode');
 });
 
 });

@@ -4,6 +4,9 @@
     <div class="row">
       <div class="col">
         <h1>Funerals</h1>
+        <div class="text-right">
+            <a href="#"><button type="button" class="btn btn-success center">Add worker</button></a>
+        </div>
         <div class="table-responsive">
         <table class="table table-secondary table-striped border border-black">
             <thead>
@@ -13,6 +16,7 @@
                 <th scope="col">Surname</th>
                 <th scope="col">Phone number</th>
                 <th scope="col">Salary</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -38,7 +42,7 @@
               </tr>
               @empty
               <tr>
-                <td colspan="6" class="text-center">THERE IS NO DATA</td>
+                <td colspan="7" class="text-center">THERE IS NO DATA</td>
             </tr>
               @endforelse
             </tbody>

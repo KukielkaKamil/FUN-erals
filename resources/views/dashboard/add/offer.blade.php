@@ -25,33 +25,27 @@
                         </div>
                     @endif
                     <div class="container">
-                        <form method="POST" action="{{ route('update.client', $client->id) }}" class="needs-validation">
+                        <form method="POST" action="{{ route('store.offer') }}" class="needs-validation">
                             @csrf
-                            @method('PUT')
+                            @method('POST')
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name" id="name"
-                                    value="{{ $client->name }}" required>
+                                    value="{{ old('name') }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="surname" class="form-label">Surname</label>
-                                <input type="text" class="form-control" name="surname" id="surname"
-                                    value="{{ $client->surname }}" required>
+                                <label for="description">Example Textarea</label>
+                                <textarea class="form-control" id="description" name ="description" rows="3" required>{{old('description')}}</textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="pesel" class="form-label">Pesel</label>
-                                <input type="text" class="form-control" name="pesel" id="pesel"
-                                    value="{{ $client->pesel }}" maxlength="11" required>
+                                <label for="duration" class="form-label">Duration</label>
+                                <input type="time" class="form-control" name="duration" id="duration"
+                                    value="{{ old('duration') }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" name="email" id="emial"
-                                    value="{{ $client->email }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone_number" class="form-label">Phone number</label>
-                                <input type="number" class="form-control" name="phone_number" id="phone_number"
-                                    value={{ $client->phone_number }} required>
+                                <label for="price" class="form-label">Price</label>
+                                <input type="number" class="form-control" name="price" id="price"
+                                    value="{{ old('price') }}" step=".01" required>
                             </div>
                             <div class="mt-1">
                                 <button type="submit" class="btn btn-primary">Submit</button>
