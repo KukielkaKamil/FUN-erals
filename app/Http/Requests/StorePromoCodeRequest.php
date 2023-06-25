@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClientRequest extends FormRequest
+class StorePromoCodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class UpdateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|',
-            'surname'=>'required|string',
-            'pesel' => 'required|integer|min:00000000000|max:99999999999|digits:11',
-            'email' => 'required|email',
-            'phone_number' => 'required|integer|min:000000000|max:999999999digits:9',
+            'code' => "nullable|max:30|string|unique:promo_codes,code",
+            'discount' => "required|between:0,100|integer",
+            'date' => "required|date|after_or_equal:today"
         ];
     }
 }

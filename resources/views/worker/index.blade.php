@@ -17,7 +17,6 @@
                         </thead>
                         <tbody>
                             @forelse ($funerals as $f)
-                                @if (strcmp($f->getStatus(), 'done') != 0)
                                     <tr>
                                         <th scope="row">{{ $f->id }}</th>
                                         <td>{{ \Carbon\Carbon::parse($f->date)->format('Y-m-d') }}</td>
@@ -26,7 +25,6 @@
                                         <td><a href={{ route('show.client', ['id' => $f->client->id]) }}>
                                                 {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
                                     </tr>
-                                @endif
 
                             @empty
                                 <tr>

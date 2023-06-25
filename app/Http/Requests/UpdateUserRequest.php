@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|',
             'surname'=>'required|string',
             'email' => 'required|email',
-            'phone_number' => 'required|integer|min:000000000|max:999999999',
+            'phone_number' => 'required|integer|min:000000000|max:999999999|digits:9',
             'salary' => [
                 'required',
                 'regex:/^\d+(\.\d{1,2})?$/',

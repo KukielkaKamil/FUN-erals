@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 class AddNewFuneralRequest extends FormRequest
 {
+    protected $redirect = "/#order";
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,15 +26,15 @@ class AddNewFuneralRequest extends FormRequest
         return [
             'name' => 'required|string|',
             'surname'=>'required|string',
-            'pesel' => 'required|integer|min:00000000000|max:99999999999',
+            'pesel' => 'required|integer|min:00000000000|max:99999999999|digits:11',
             'email' => 'required|email',
-            'phone_number' => 'required|integer|min:000000000|max:999999999',
+            'phone_number' => 'required|integer|min:000000000|max:999999999|digits:9',
             'offer_id' => [
                 'required',
                 'integer',
                 Rule::exists('offers', 'id'),
             ],
-            'date' => 'required|date',
+            'date' => 'required|date|after_or_equal:today',
             'time' => 'required|date_format:H:i',
         ];
     }

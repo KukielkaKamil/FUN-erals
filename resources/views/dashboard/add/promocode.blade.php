@@ -31,7 +31,7 @@
                             <div class="mb-3">
                                 <label for="code" class="form-label">Code</label>
                                 <input type="text" maxlength="30" class="form-control" name="code" id="code"
-                                    value="{{ old('code') }}" required>
+                                    value="{{ old('code') }}">
                                 <div class="form-text" id="help-text">If left empty will be generated randomly.</div>
                             </div>
                             <div class="mb-3">
@@ -41,6 +41,11 @@
                                     value="{{ old('price') }}" required>
                                     <span class="input-group-text" id="percent">%</span>
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Expire Date</label>
+                                <input type="date" class="form-control" name="date" id="date"
+                                    aria-describedby="dateHelp" required>
                             </div>
                             <div class="mt-1">
                                 <button type="submit" class="btn btn-primary">Submit</button>

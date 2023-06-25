@@ -12,20 +12,25 @@ class UserController extends Controller
 {
     public function index()
  {
+    $this->authorize('viewAny', User::class);
     $workers = User::all();
     return view('dashboard.workers', ['workers' => $workers]);
  }
 
  public function edit($id)
  {
-    return view('dashboard.edit.worker', ['worker' => User::findOrFail($id)]);
+    $user =User::findOrFail($id);
+    $this->authorize('update', $user);
+    return view('dashboard.edit.worker', ['worker' => $user]);
  }
  public function add()
  {
+    $this->authorize('create', User::class);
     return view('dashboard.add.worker');
  }
 
  public function store(StoreUserRequest $request){
+    $this->authorize('create', User::class);
     $user = new User;
     $user->name = $request->input('name');
     $user->surname = $request->input('surname');
@@ -37,12 +42,17 @@ class UserController extends Controller
     return redirect()->route('dashboard.workers');
  }
  public function update(UpdateUserRequest $request,$id){
+
+    $user =User::findOrFail($id);
+    $this->authorize('update', $user);
     $input = $request->all();
-    User::find($id)->update($input);
+    $user->update($input);
     return redirect()->route('dashboard.workers');
  }
  public function destroy($id){
-    User::findOrFail($id)->delete();
+    $user =User::findOrFail($id);
+    $this->authorize('delete', $user);
+    $user->delete();
     return redirect()->back();
  }
 }

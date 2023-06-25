@@ -29,6 +29,9 @@
             <a class="nav-link" href="#services">Services</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#order">Order Funeral</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>
         </ul>
@@ -67,7 +70,7 @@
     <div class="container">
       <h2 class="text-center mb-4">Our Services</h2>
       <div class="row">
-        @forelse ($offers as $offer )
+        @forelse ($mainOffers as $offer )
         <div class="col-lg-4">
             <div class="card mb-4">
               <img src="{{ asset('images/'.$offer->id.'.jpg') }}" height="250px" alt="Service" class="card-img-top">
@@ -84,14 +87,36 @@
             <h1>Currently there are no offers</h1>
         @endforelse
         <div class="text-center">
-            <a href="#"><button type="button" class="btn btn-secondary center">See all offer</button></a>
+            <button type="button" class="btn btn-secondary center mb-2"
+                data-bs-toggle="collapse" data-bs-target="#remainingOffers"
+                aria-expanded="false" aria-controls="remainingOffers">See all offer</button>
+        </div>
+        <div class="collapse" id="remainingOffers">
+            <div class="row">
+            @forelse ($remainingOffers as $offer )
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                  <img src="{{ asset('images/'.$offer->id.'.jpg') }}" height="250px" alt="Service" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title">{{$offer->name}}</h5>
+                    <p class="card-text">{{$offer->description}}</p>
+                  </div>
+                  <div class="card-footer text-muted">
+                    Price {{$offer->price}} PLN
+                  </div>
+                </div>
+              </div>
+            @empty
+                <h1>Currently there are no offers</h1>
+            @endforelse
+            </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-5">
+  <!-- Order Section -->
+  <section id="order" class="py-5">
     <div class="container">
       <h2 class="text-center mb-4">Order funeral</h2>
       <div class="row">
@@ -170,6 +195,29 @@
     </div>
   </section>
 
+  <!-- Contact info and promocodes section-->
+  <section id="contact" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+            <h4>FUN-erals Funeral Home</h4>
+            <p>123 Main Street<br>
+              City, State 12345<br>
+              Phone: (555) 123-4567<br>
+              Email: info@funerals.com</p>
+          </div>
+          <div class="col-md-6">
+            <h4>Promo Codes</h4>
+            <p>Enter a promo code during the order process to avail discounts on our services.</p>
+            <p><strong>Current Promo Codes:</strong></p>
+            <ul>
+              <li><b>FUN-erals:</b> 10% off on all services. Available to <b>2023-07-30</b></li>
+              <li><b>High Five:</b> 5% off on all services. Available to <b>2024-01-01</b></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </section>
   <!-- Footer -->
   <footer class="bg-dark text-white text-center py-3">
     <div class="container">

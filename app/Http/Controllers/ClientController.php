@@ -15,12 +15,14 @@ class ClientController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Client::class);
         $clients = Client::all();
         return view('dashboard.clients', ['clients' => $clients]);
     }
 
     public function show($id)
     {
+        $this->authorize('viewAny', Client::class);
         $client = Client::findOrFail($id);
         return view('dashboard.show.client', ['client' => $client]);
     }
@@ -28,17 +30,22 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client = Client::findOrFail($id);
+        $this->authorize('update', $client);
         return view('dashboard.edit.client', ['client' => $client]);
     }
     public function update(UpdateClientRequest $request, $id)
     {
+        $client = Client::findOrFail($id);
+        $this->authorize('update', $client);
         $input = $request->all();
-        Client::find($id)->update($input);
+        $client->update($input);
         return redirect()->route('dashboard.clients');
     }
     public function destroy($id)
     {
-        Client::findOrFail($id)->delete();
+        $client = Client::findOrFail($id);
+        $this->authorize('update', $client);
+        $client->delete();
         return redirect()->back();
     }
 

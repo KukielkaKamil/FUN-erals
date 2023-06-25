@@ -2,13 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Funeral;
+use App\Models\PromoCode;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
-class FuneralPolicy
+class PromoCodePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -21,9 +19,9 @@ class FuneralPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Funeral $funeral): bool
+    public function view(User $user, PromoCode $promoCode): bool
     {
-        return $user->funeral->contains($funeral->id);
+        return true;
     }
 
     /**
@@ -31,13 +29,13 @@ class FuneralPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->id == 1;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Funeral $funeral): bool
+    public function update(User $user, PromoCode $promoCode): bool
     {
         return $user->id == 1;
     }
@@ -45,7 +43,7 @@ class FuneralPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Funeral $funeral): bool
+    public function delete(User $user, PromoCode $promoCode): bool
     {
         return $user->id == 1;
     }
@@ -53,7 +51,7 @@ class FuneralPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Funeral $funeral): bool
+    public function restore(User $user, PromoCode $promoCode): bool
     {
         return false;
     }
@@ -61,7 +59,7 @@ class FuneralPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Funeral $funeral): bool
+    public function forceDelete(User $user, PromoCode $promoCode): bool
     {
         return $user->id == 1;
     }

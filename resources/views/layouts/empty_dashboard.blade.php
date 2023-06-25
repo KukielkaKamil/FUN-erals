@@ -50,6 +50,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('dashboard.clients')}}">Clients</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('dashboard.promocodes')}}">Promo Codes</a>
+                  </li>
                   @endcan
                   @cannot('is-admin')
                   <li class="nav-item">

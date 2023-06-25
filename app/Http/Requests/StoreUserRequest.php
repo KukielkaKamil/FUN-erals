@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
             'surname'=>'required|string',
             'email' => 'required|email|unique:users,email',
             'password'=>'required|string',
-            'phone_number' => 'required|integer|min:000000000|max:999999999',
+            'phone_number' => 'required|integer|min:000000000|max:999999999|digits:9',
             'salary' => [
                 'required',
                 'regex:/^\d+(\.\d{1,2})?$/',
