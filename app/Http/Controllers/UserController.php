@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePsswordRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
@@ -54,5 +55,33 @@ class UserController extends Controller
     $this->authorize('delete', $user);
     $user->delete();
     return redirect()->back();
+ }
+
+ public function passwd($id){
+    $user = User::findOrFail($id);
+    return view('dashboard.password',['id'=> $id]);
+ }
+
+ public function passwdChange(ChangePsswordRequest $request,$id){
+    $user = User::findOrFail($id);
+    if(!Hash::check($request->input('oldPasswd'), $user->password)){
+        return redirect()->back()->withErrors(['error' => 'Old password is wrong']);
+    }
+    else if($request->input('newPasswd') != $request->input('confirmPasswd')){
+        return redirect()->back()->withErrors(['error' => 'New password does not match']);
+    }
+    else{
+        $user->password = Hash::make($request->input('newPasswd'));
+        $user->save();
+        return back()->with("status", "Password changed successfully!");
+    }
+ }
+
+ public function passwdReset($id){
+    $user = User::findOrFail($id);
+    $this->authorize('update', $user);
+    $user->password = Hash::make('1234');
+    $user->save();
+    return back()->with("status", "Password reseted successfully!");
  }
 }

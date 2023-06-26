@@ -48,7 +48,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         $client = Client::findOrFail($id);
-        $this->authorize('update', $client);
+        $this->authorize('delete', $client);
         $client->delete();
         return redirect()->back();
     }

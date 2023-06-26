@@ -47,6 +47,9 @@ Route::controller(UserController::class)->group(function () {
     Route::delete('/dash/workers/{id}','destroy')->name('destroy.worker');
     Route::get('/dash/workers/add', 'add')->name('add.worker');
     Route::post('/dash/workers/add', 'store')->name('store.worker');
+    Route::get('/passwd/{id}/change', 'passwd')->name('passwd');
+    Route::patch('/passwd/{id}', 'passwdChange')->name('change.passwd');
+    Route::patch('/passwd/{id}/reset', 'passwdReset')->name('reset.passwd');
 
 });
 Route::controller(OfferController::class)->group(function () {
