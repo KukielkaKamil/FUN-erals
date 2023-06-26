@@ -61,7 +61,7 @@ Route::controller(OfferController::class)->group(function () {
 Route::controller(ClientController::class)->group(function () {
     Route::get('/dash/clients', 'index')->name('dashboard.clients');
     Route::get('/dash/clients/{id}/show', 'show')->name('show.client');
-    Route::get('/worker/client/{id}/show', 'workerView')->name('worker.client');
+    Route::get('/worker/client/{id}/show', 'show')->name('worker.client');
     Route::get('/dash/clients/{id}/edit', 'edit')->name('edit.client');
     Route::put('/dash/clients/{id}', 'update')->name('update.client');
     Route::delete('/dash/clients/{id}','destroy')->name('destroy.client');
@@ -80,3 +80,4 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/logout', 'logout')->name('logout');
 });
 Route::post('/order', [ClientController::class,'addNewFuneral'])->name('store.order');
+Route::get('/success',[ClientController::class, 'successOrder'])->name('success');

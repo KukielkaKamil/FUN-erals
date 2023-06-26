@@ -3,7 +3,26 @@
 <div class="container mt-3">
     <div class="row">
       <div class="col">
-        <h1>Funerals</h1>
+        @if (session('error'))
+        <div class="row d-flex justify-content-center">
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        </div>
+    @endif
+    <h1>Clients</h1>
+
+    @if ($errors->any())
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
         <div class="table-responsive">
         <table class="table table-secondary table-striped border border-black">
             <thead>
@@ -14,6 +33,7 @@
                 <th scope="col">Pesel</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Phone_number</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -45,7 +65,7 @@
               </tr>
               @empty
               <tr>
-                <td colspan="6" class="text-center">THERE IS NO DATA</td>
+                <td colspan="9" class="text-center">THERE IS NO DATA</td>
             </tr>
               @endforelse
             </tbody>

@@ -3,7 +3,26 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col">
-                <h1>Funerals</h1>
+                @if (session('error'))
+                <div class="row d-flex justify-content-center">
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                </div>
+            @endif
+            <h1>Funerals</h1>
+
+            @if ($errors->any())
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6">
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @endif
                 <div class="table-responsive">
                     <table class="table table-secondary table-striped border border-black">
                         <thead>
@@ -15,6 +34,7 @@
                                 <th scope="col">Cost</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Client</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -32,10 +52,8 @@
                                     <td><a href={{route('show.client',['id' => $f->client->id])}}>
                                         {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
                                     <td>
-                                        {{-- @if (strcmp($status, 'in progress') != 0) --}}
                                             <a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"
                                                     class="btn btn-secondary">Edit</button></a>
-                                        {{-- @endif --}}
                                     </td>
                                     <td>
                                         <form method="POST" action="{{ route('destroy.funeral', $f->id) }}">
@@ -47,7 +65,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">THERE IS NO DATA</td>
+                                    <td colspan="9" class="text-center">THERE IS NO DATA</td>
                                 </tr>
                             @endforelse
                         </tbody>

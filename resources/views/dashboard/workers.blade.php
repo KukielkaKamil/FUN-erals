@@ -3,9 +3,28 @@
 <div class="container mt-3">
     <div class="row">
       <div class="col">
-        <h1>Funerals</h1>
+        @if (session('error'))
+        <div class="row d-flex justify-content-center">
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        </div>
+    @endif
+    <h1>Workers</h1>
+
+    @if ($errors->any())
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
         <div class="text-right">
-            <a href="#"><button type="button" class="btn btn-success center">Add worker</button></a>
+            <a href="{{route('add.worker')}}"><button type="button" class="btn btn-success ">Add worker</button></a>
         </div>
         <div class="table-responsive">
         <table class="table table-secondary table-striped border border-black">
@@ -30,7 +49,7 @@
                 <td>{{$w->salary}}</td>
                 <td>
                     <a href={{ route('edit.worker', ['id' => $w->id]) }}><button type="button"
-                    class="btn btn-secondary disabled">Edit</button></a>
+                    class="btn btn-secondary">Edit</button></a>
                 </td>
                 <td>
                     <form method="POST" action="{{ route('destroy.worker', $w->id) }}">

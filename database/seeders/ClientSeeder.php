@@ -39,8 +39,8 @@ class ClientSeeder extends Seeder
                     'phone_number' => '209648726', 'email' => 'a.drzewicki782@gmail.com'
                 ],
                 [
-                    'name' => 'Kamil', 'surname' => 'Kukiełka', 'pesel' => '01302387531',
-                    'phone_number' => '696081637', 'email' => 'k.kukielka5@wp.pl'
+                    'name' => 'Edmund', 'surname' => 'Hass', 'pesel' => '01302387531',
+                    'phone_number' => '696081637', 'email' => 'e.hass@onet.pl'
                 ],
 
             ]

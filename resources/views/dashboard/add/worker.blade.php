@@ -9,7 +9,7 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         </div>
                     @endif
-                    <h1>Funeral info</h1>
+                    <h1>Add new worker</h1>
 
                     @if ($errors->any())
                         <div class="row d-flex justify-content-center">

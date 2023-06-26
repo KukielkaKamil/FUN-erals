@@ -24,9 +24,9 @@ class UpdateClientRequest extends FormRequest
         return [
             'name' => 'required|string|',
             'surname'=>'required|string',
-            'pesel' => 'required|integer|min:00000000000|max:99999999999|digits:11',
-            'email' => 'required|email',
-            'phone_number' => 'required|integer|min:000000000|max:999999999digits:9',
+            'pesel' => 'required|digits:11|regex:/^\d{11}$/|unique:clients,pesel,'.$this->id,
+            'email' => 'required|unique:clients,email,'.$this->id.'|email',
+            'phone_number' => 'required|digits:9|regex:/^\d{9}$/',
         ];
     }
 }

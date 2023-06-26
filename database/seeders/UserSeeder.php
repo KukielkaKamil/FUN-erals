@@ -28,6 +28,11 @@ class UserSeeder extends Seeder
                     'name' => 'Zdzisław','surname' => 'Pokątny','email' => 'zd.pokatny@gmail.com','password' => Hash::make('1234'),
                     'phone_number' => '192754824','salary' => '4000'
                 ],
+                [
+                    'name' => 'Andrzej','surname' => 'Broź','email' => 'a.broz@gmail.com','password' => Hash::make('1234'),
+                    'phone_number' => '567234096','salary' => '3100'
+                ],
+
 
             ]
         );

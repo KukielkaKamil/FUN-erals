@@ -22,7 +22,7 @@
                                         <td>{{ \Carbon\Carbon::parse($f->date)->format('Y-m-d') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($f->date)->format('H:i') }}</td>
                                         <td>{{ $f->offer->name }}</td>
-                                        <td><a href={{ route('show.client', ['id' => $f->client->id]) }}>
+                                        <td><a href={{ route('worker.client', ['id' => $f->client->id]) }}>
                                                 {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
                                     </tr>
 
