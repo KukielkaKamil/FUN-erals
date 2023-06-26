@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Funeral Home</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
@@ -89,7 +89,7 @@
         <div class="text-center">
             <button type="button" class="btn btn-secondary center mb-2"
                 data-bs-toggle="collapse" data-bs-target="#remainingOffers"
-                aria-expanded="false" aria-controls="remainingOffers">See all offer</button>
+                aria-expanded="false" aria-controls="remainingOffers">See all offers</button>
         </div>
         <div class="collapse" id="remainingOffers">
             <div class="row">
@@ -226,7 +226,7 @@
   </footer>
 
   <!-- Bootstrap JS -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"></script>
 
 </body>
 

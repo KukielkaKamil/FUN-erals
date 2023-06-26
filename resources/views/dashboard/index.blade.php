@@ -4,25 +4,25 @@
         <div class="row">
             <div class="col">
                 @if (session('error'))
-                <div class="row d-flex justify-content-center">
-                    <div class="alert alert-danger">{{ session('error') }}</div>
-                </div>
-            @endif
-            <h1>Funerals</h1>
+                    <div class="row d-flex justify-content-center">
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    </div>
+                @endif
+                <h1>Funerals</h1>
 
-            @if ($errors->any())
-                <div class="row d-flex justify-content-center">
-                    <div class="col-6">
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                @if ($errors->any())
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-6">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endif
+                @endif
                 <div class="table-responsive">
                     <table class="table table-secondary table-striped border border-black">
                         <thead>
@@ -49,11 +49,11 @@
                                     <td><span class={{ 'text-' . $states[$status] }}>{{ $status }}</span></td>
                                     <td>{{ $f->cost }}</td>
                                     <td>{{ $f->offer->name }}</td>
-                                    <td><a href={{route('show.client',['id' => $f->client->id])}}>
-                                        {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
+                                    <td><a href={{ route('show.client', ['id' => $f->client->id]) }}>
+                                            {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
                                     <td>
-                                            <a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"
-                                                    class="btn btn-secondary">Edit</button></a>
+                                        <a href={{ route('edit.funeral', ['id' => $f->id]) }}><button type="button"
+                                                class="btn btn-secondary">Edit</button></a>
                                     </td>
                                     <td>
                                         <form method="POST" action="{{ route('destroy.funeral', $f->id) }}">

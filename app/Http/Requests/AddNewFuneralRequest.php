@@ -36,6 +36,7 @@ class AddNewFuneralRequest extends FormRequest
             ],
             'date' => 'required|date|after_or_equal:today',
             'time' => 'required|date_format:H:i',
+            'promo_code' => 'nullable|exists:promo_codes,code'
         ];
     }
 }

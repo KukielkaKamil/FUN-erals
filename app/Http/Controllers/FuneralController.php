@@ -6,12 +6,8 @@ use App\Http\Requests\UpdateFuneralRequest;
 use App\Http\Requests\UpdateNewRequest;
 use App\Models\Funeral;
 use App\Models\Offer;
-use App\Models\Status;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Console\Input\Input;
 
 class FuneralController extends Controller
 {
@@ -58,9 +54,6 @@ class FuneralController extends Controller
         $this->authorize('update', $funeral);
         $offers = Offer::all();
         $workers = User::all()->except(1);
-        // ->filter(function ($worker) use ($funeral) {
-        //     return !$worker->isOccupied($funeral);
-        // });
 
         return view('dashboard.edit.funeral', ['funeral' => $funeral, 'offers' => $offers, 'workers' => $workers]);
     }

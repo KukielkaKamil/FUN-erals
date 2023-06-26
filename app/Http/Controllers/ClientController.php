@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddNewFuneralRequest;
-use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Mail\SendPromoCode;
 use App\Models\Client;
@@ -11,7 +10,6 @@ use App\Models\Funeral;
 use App\Models\Offer;
 use App\Models\PromoCode;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -59,6 +57,11 @@ class ClientController extends Controller
 
     public function addNewFuneral(AddNewFuneralRequest $request)
     {
+        //checking if code isn't expired
+        $promocode = $client = PromoCode::where('code', $request->input('promo_code'))->first();
+        if($promocode != null && Carbon::parse($promocode->exp_date)->lessThan(Carbon::now())){
+            return redirect()->back()->withErrors(['error' => 'Code has already expired']);
+        }
         // Adding new client or checking if exists
         $clientId = 0;
         if (Client::where('pesel', $request->input('pesel'))->exists()) {
@@ -75,7 +78,6 @@ class ClientController extends Controller
             $clientId = $client->id;
         }
         //checking interted promocode
-        $promocode = $client = PromoCode::where('code', $request->input('promo_code'))->first();
         if($promocode != null && ($promocode->client == null || $promocode->client->id == $clientId)){
             $discount=1.0 - $promocode->discount;
         }
