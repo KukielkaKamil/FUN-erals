@@ -3,10 +3,34 @@
 
 Dear {{ $mailData['name'] }},
 
-Thank you for entrusting FUN-erals with your funeral service needs. We appreciate your support and would like to express our gratitude by offering you a special promo code. Take advantage of this exclusive offer before it expires!
+Thank you for entrusting FUN-erals with your funeral service needs. There are your and your order details:
 
 @component('mail::panel')
-**Promo Code:** {{ $mailData['promocode'] }}
+**Client name:** {{$mailData['client']->name.' '.$mailData['client']->surname}}
+<br>
+**Pesel:** {{$mailData['client']->pesel}}
+<br>
+**Phone number:** {{$mailData['client']->phone_number}}
+<br>
+**e-mail:** {{$mailData['client']->email}}
+<br>
+**Date:** {{$mailData['funeral']->date}}
+<br>
+**Offer type** {{$mailData['funeral']->offer->name}}
+<br>
+@if($mailData['discount'] != 1.0)
+**Discount:** {{$mailData['discount']*100}}%
+<br>
+@endif
+**Final price:** {{$mailData['funeral']->cost}}
+@endcomponent
+
+We appreciate your support and would like to express our gratitude by offering you a special promo code. Take advantage of this exclusive offer before it expires!
+
+@component('mail::panel')
+**Promo Code:** {{ $mailData['promocode']->code }}
+<br>
+**Discount:** {{$mailData['promocode']->discount*100}}%
 <br>
 **Expiration Date:** {{ $mailData['exp_date'] }}
 @endcomponent

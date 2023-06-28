@@ -7,6 +7,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PromoCodeController;
 use App\Http\Controllers\UserController;
 use App\Models\Offer;
+use App\Models\PromoCode;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,18 +24,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home',['mainOffers' => Offer::whereIn('id',array(1,2,3))->get(),
     'remainingOffers'=>Offer::whereNotIn('id',array(1,2,3))->get(),
-    'offers' => Offer::all()]);
+    'offers' => Offer::all(),
+    'promo_codes' => PromoCode::where('client_id',null)->limit(3)->get()]);
 })->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 Route::controller(FuneralController::class)->group(function () {
     Route::get('/dash/funerals', 'index')->name('dashboard.index');
-    Route::get('/dash/new', 'new')->name('dashboard.new');
     Route::get('/dash/funerals/{id}/edit', 'edit')->name('edit.funeral');
     Route::patch('/dash/funerals/{id}', 'update')->name('update.funeral');
-    Route::get('dash/new/{id}/edit', 'editNew')->name('edit.new');
-    Route::patch('dash/new/{id}', 'updateNew')->name('update.new');
     Route::delete('/dash/funerals/{id}','destroy')->name('destroy.funeral');
+
+    Route::get('/dash/submissions', 'new')->name('dashboard.new');
+    Route::get('dash/submissions/{id}/edit', 'editNew')->name('edit.new');
+    Route::patch('dash/submissions/{id}', 'updateNew')->name('update.new');
 
     Route::get('/worker/funerals', 'index')->name('worker.index');
     Route::get('/worker/history', 'history')->name('worker.history');
@@ -74,6 +77,7 @@ Route::controller(PromoCodeController::class)->group(function () {
     Route::get('/dash/promocodes', 'index')->name('dashboard.promocodes');
     Route::get('/dash/promocodes/add', 'add')->name('add.promocode');
     Route::post('/dash/promocodes/add', 'store')->name('store.promocode');
+    Route::delete('/dash/promocodes/{id}','destroy')->name('destroy.promocode');
 });
 
 });

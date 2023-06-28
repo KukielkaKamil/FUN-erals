@@ -25,7 +25,6 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|',
             'surname'=>'required|string',
             'email' => 'required|unique:users,email,'.$this->id.'|email',
-            'password' => 'required|string',
             'phone_number' => 'required|regex:/^\d{9}$/|digits:9',
             'salary' => [
                 'required',

@@ -33,7 +33,7 @@
                                 <p><b>PESEL:</b> {{ $client->pesel }}</p>
                                 @endcan
                                 <p><b>Phone number:</b> {{ $client->phone_number }}</p>
-                                <p><b>E-mail:</b> {{ $client->email}}</p>
+                                <p><b>E-mail: </b><a href="mailto:{{ $client->email}}">{{ $client->email}} </a></p>
                             </div>
                         </div>
                         <a href={{ url()->previous() }}><button type="button"

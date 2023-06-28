@@ -35,4 +35,12 @@ class PromoCodeController extends Controller
         $promocode->save();
         return redirect()->route('dashboard.promocodes');
     }
+
+    public function destroy($id)
+    {
+        $promo_code = PromoCode::findOrFail($id);
+        $this->authorize('delete', $promo_code);
+        $promo_code->delete();
+        return redirect()->back();
+    }
 }

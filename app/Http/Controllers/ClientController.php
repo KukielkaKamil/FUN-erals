@@ -51,21 +51,25 @@ class ClientController extends Controller
         return redirect()->back();
     }
 
-    public function successOrder(){
+    public function successOrder()
+    {
         return view('success');
     }
 
     public function addNewFuneral(AddNewFuneralRequest $request)
     {
         //checking if code isn't expired
-        $promocode = $client = PromoCode::where('code', $request->input('promo_code'))->first();
-        if($promocode != null && Carbon::parse($promocode->exp_date)->lessThan(Carbon::now())){
+        $promocode = PromoCode::where('code', $request->input('promo_code'))->first();
+        if ($promocode != null && Carbon::parse($promocode->exp_date)->lessThan(Carbon::now())) {
             return redirect()->back()->withErrors(['error' => 'Code has already expired']);
         }
         // Adding new client or checking if exists
         $clientId = 0;
         if (Client::where('pesel', $request->input('pesel'))->exists()) {
             $client = Client::where('pesel', $request->input('pesel'))->first();
+            if(strcmp($client->name,$request->input('name')) != 0 || strcmp($client->surname,$request->input('surname')) != 0){
+                return redirect()->back()->withErrors(['error' => 'Given data does not match our records. Check if your data is correct.']);
+            }
             $clientId = $client->id;
         } else {
             $client = new Client;
@@ -78,11 +82,10 @@ class ClientController extends Controller
             $clientId = $client->id;
         }
         //checking interted promocode
-        if($promocode != null && ($promocode->client == null || $promocode->client->id == $clientId)){
-            $discount=1.0 - $promocode->discount;
-        }
-        else{
-            $discount = 0.0;
+        if ($promocode != null && ($promocode->client == null || $promocode->client->id == $clientId)) {
+            $discount = 1.0 - $promocode->discount;
+        } else {
+            $discount = 1.0;
         }
         //adding new funeral
         $funeral = new Funeral;
@@ -99,7 +102,7 @@ class ClientController extends Controller
         //creating new promocode
         $promo = new PromoCode;
         $promo->code = Str::random(30);
-        $promo->discount = rand(0,15)/100.0;
+        $promo->discount = rand(1, 15) / 100.0;
         $promo->exp_date = Carbon::now()->addDays(60);
         $promo->client_id = $clientId;
         $promo->save();
@@ -107,8 +110,11 @@ class ClientController extends Controller
         //creating new email
         $mailData = [
             'name' => $request->input('name'),
-            'promocode' => $promo->code,
             'exp_date' => $promo->exp_date->toDateString(),
+            'promocode' => $promo,
+            'funeral' => $funeral,
+            'client' => $client,
+            'discount' => $discount
         ];
 
         Mail::to($request->input('email'))->send(new SendPromoCode($mailData));

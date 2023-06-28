@@ -50,14 +50,15 @@
                                     @if ($p->client == null)
                                         <td>Everyone</td>
                                     @else
-                                        <td>{{ $p->client->name . ' ' . $p->client->surname }}</td>
+                                        <td><a href={{ route('show.client', ['id' => $p->client->id]) }}>
+                                                {{ $p->client->name . ' ' . $p->client->surname }}</a></td>
                                     @endif
                                     <td>
                                         <a href={{ route('edit.client', ['id' => $p->id]) }}><button type="button"
                                                 class="btn btn-secondary">Edit</button></a>
                                     </td>
                                     <td>
-                                        <form method="POST" action="{{ route('destroy.client', $p->id) }}">
+                                        <form method="POST" action="{{ route('destroy.promocode', $p->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <input type="submit" class="btn btn-danger " value="Delete"></button>

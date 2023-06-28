@@ -26,7 +26,7 @@ class AddNewFuneralRequest extends FormRequest
         return [
             'name' => 'required|string|',
             'surname'=>'required|string',
-            'pesel' => 'required|unique:clients,pesel|regex:/^\d{11}$/|digits:11',
+            'pesel' => 'required|regex:/^\d{11}$/|digits:11',
             'email' => 'required|email',
             'phone_number' => 'required|regex:/^\d{9}$/|digits:9',
             'offer_id' => [

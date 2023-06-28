@@ -28,7 +28,7 @@
                     @cannot('is-admin')
               {{ route('worker.index') }}
               @endcannot><i
-                        class="fas fa-cross"></i> FUN-erals</a>
+                        class="fas fa-cross text-light"></i> <span class="text-light" >FUN-erals</span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -38,30 +38,30 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         @can('is-admin')
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href={{ route('dashboard.index') }}>Funerals</a>
+                                <a class="nav-link text-light" aria-current="page" href={{ route('dashboard.index') }}>Funerals</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.new') }}">New submissions</a>
+                                <a class="nav-link text-light" href="{{ route('dashboard.new') }}">New submissions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.workers') }}">Workers</a>
+                                <a class="nav-link text-light" href="{{ route('dashboard.workers') }}">Workers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.offers') }}">Offer</a>
+                                <a class="nav-link text-light" href="{{ route('dashboard.offers') }}">Offer</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.clients') }}">Clients</a>
+                                <a class="nav-link text-light" href="{{ route('dashboard.clients') }}">Clients</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.promocodes') }}">Promo Codes</a>
+                                <a class="nav-link text-light" href="{{ route('dashboard.promocodes') }}">Promo Codes</a>
                             </li>
                         @endcan
                         @cannot('is-admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('worker.index') }}">Funerals</a>
+                                <a class="nav-link text-light" href="{{ route('worker.index') }}">Funerals</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('worker.history') }}">History</a>
+                                <a class="nav-link text-light" href="{{ route('worker.history') }}">History</a>
                             </li>
                         @endcannot
                     </ul>

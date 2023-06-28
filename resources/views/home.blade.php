@@ -211,8 +211,11 @@
             <p>Enter a promo code during the order process to avail discounts on our services.</p>
             <p><strong>Current Promo Codes:</strong></p>
             <ul>
-              <li><b>FUN-erals:</b> 10% off on all services. Available to <b>2023-07-30</b></li>
-              <li><b>High Five:</b> 5% off on all services. Available to <b>2024-01-01</b></li>
+                @forelse ( $promo_codes as $pc)
+                <li><b>{{$pc->code}}:</b> {{$pc->discount * 100}}% off on all services. Available to <b>{{$pc->exp_date}}</b></li>
+                @empty
+                    <li>Currently there are no promocodes</li>
+                @endforelse
             </ul>
           </div>
       </div>
