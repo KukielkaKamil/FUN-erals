@@ -24,7 +24,7 @@ class StoreOfferRequest extends FormRequest
         return [
             'name' => 'required|string|max:80',
             'description' => 'required|string',
-            'duration' =>'required|date_format:H:i',
+            'duration' => 'required|date_format:H:i',
             'price' => [
                 'required',
                 'regex:/^\d+(\.\d{1,2})?$/',
@@ -36,7 +36,7 @@ class StoreOfferRequest extends FormRequest
                     }
 
                     if ($value != $formattedValue) {
-                        $fail('The '.$attribute.' field must be a decimal number or inteager');
+                        $fail('The ' . $attribute . ' field must be a decimal number or inteager');
                     }
                 }
             ],

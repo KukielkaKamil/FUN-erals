@@ -10,7 +10,7 @@ class PromoCode extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['code','discount','exp_date'];
+    protected $fillable = ['code', 'discount', 'exp_date'];
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);

@@ -37,8 +37,8 @@
                             <div class="mb-3">
                                 <label for="discount" class="form-label">Discount</label>
                                 <div class="input-group">
-                                <input type="number" max="100" min="0" class="form-control" name="discount" id="discount"
-                                    value="{{ old('price') }}" required>
+                                    <input type="number" max="100" min="0" class="form-control" name="discount"
+                                        id="discount" value="{{ old('price') }}" required>
                                     <span class="input-group-text" id="percent">%</span>
                                 </div>
                             </div>

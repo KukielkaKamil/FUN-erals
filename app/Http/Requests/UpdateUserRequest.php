@@ -23,8 +23,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|',
-            'surname'=>'required|string',
-            'email' => 'required|unique:users,email,'.$this->id.'|email',
+            'surname' => 'required|string',
+            'email' => 'required|unique:users,email,' . $this->id . '|email',
             'phone_number' => 'required|regex:/^\d{9}$/|digits:9',
             'salary' => [
                 'required',
@@ -37,7 +37,7 @@ class UpdateUserRequest extends FormRequest
                     }
 
                     if ($value != $formattedValue) {
-                        $fail('The '.$attribute.' field must be a decimal number or inteager');
+                        $fail('The ' . $attribute . ' field must be a decimal number or inteager');
                     }
                 }
             ],

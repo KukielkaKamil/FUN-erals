@@ -25,7 +25,7 @@
                         </div>
                     @endif
                     <div class="container">
-                        <form method="POST" action="{{ route('store.worker',) }}" class="needs-validation">
+                        <form method="POST" action="{{ route('store.worker') }}" class="needs-validation">
                             @csrf
                             @method('POST')
                             <div class="mb-3">

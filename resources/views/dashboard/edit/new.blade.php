@@ -50,10 +50,10 @@
                                 <div class="card card-body">
                                     <div class="list-group">
                                         @forelse ($workers as $worker)
-                                            <label class="list-group-item" @if ($worker->isOccupied($funeral))
-                                                style="color:gray; text-decoration:line-through;" @endif>
-                                                <input class="form-check-input me-1" name="workers[]"
-                                                    id="workersCheck" type="checkbox" value="{{ $worker->id }}"
+                                            <label class="list-group-item"
+                                                @if ($worker->isOccupied($funeral)) style="color:gray; text-decoration:line-through;" @endif>
+                                                <input class="form-check-input me-1" name="workers[]" id="workersCheck"
+                                                    type="checkbox" value="{{ $worker->id }}"
                                                     @if ($worker->funeral->contains($funeral->id)) checked @endif
                                                     @if ($worker->isOccupied($funeral)) disabled @endif>
                                                 {{ $worker->name . ' ' . $worker->surname }}

@@ -10,8 +10,9 @@ class Offer extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['name','description','duration','price'];
-    public function funeral(): HasMany{
+    protected $fillable = ['name', 'description', 'duration', 'price'];
+    public function funeral(): HasMany
+    {
         return $this->hasMany(Funeral::class);
     }
 }

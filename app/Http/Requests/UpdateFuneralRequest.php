@@ -37,7 +37,7 @@ class UpdateFuneralRequest extends FormRequest
                     }
 
                     if ($value != $formattedValue) {
-                        $fail('The '.$attribute.' field must be a decimal number or inteager');
+                        $fail('The ' . $attribute . ' field must be a decimal number or inteager');
                     }
                 }
             ],

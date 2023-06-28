@@ -23,9 +23,9 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|',
-            'surname'=>'required|string',
+            'surname' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'password'=>'required|string',
+            'password' => 'required|string',
             'phone_number' => 'required|regex:/^\d{9}$/|digits:9',
             'salary' => [
                 'required',
@@ -38,7 +38,7 @@ class StoreUserRequest extends FormRequest
                     }
 
                     if ($value != $formattedValue) {
-                        $fail('The '.$attribute.' field must be a decimal number or inteager');
+                        $fail('The ' . $attribute . ' field must be a decimal number or inteager');
                     }
                 }
             ],

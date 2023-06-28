@@ -30,14 +30,14 @@
                             <div class="col">
                                 <p><b>Client:</b> {{ $client->name . ' ' . $client->surname }}</p>
                                 @can('is-admin')
-                                <p><b>PESEL:</b> {{ $client->pesel }}</p>
+                                    <p><b>PESEL:</b> {{ $client->pesel }}</p>
                                 @endcan
                                 <p><b>Phone number:</b> {{ $client->phone_number }}</p>
-                                <p><b>E-mail: </b><a href="mailto:{{ $client->email}}">{{ $client->email}} </a></p>
+                                <p><b>E-mail: </b><a href="mailto:{{ $client->email }}">{{ $client->email }} </a></p>
                             </div>
                         </div>
                         <a href={{ url()->previous() }}><button type="button"
-                        class="btn btn-primary disabled mt-2">Back</button></a>
+                                class="btn btn-primary disabled mt-2">Back</button></a>
                     </div>
                 </div>
             </div>

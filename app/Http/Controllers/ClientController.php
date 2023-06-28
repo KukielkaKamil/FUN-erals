@@ -67,7 +67,7 @@ class ClientController extends Controller
         $clientId = 0;
         if (Client::where('pesel', $request->input('pesel'))->exists()) {
             $client = Client::where('pesel', $request->input('pesel'))->first();
-            if(strcmp($client->name,$request->input('name')) != 0 || strcmp($client->surname,$request->input('surname')) != 0){
+            if (strcmp($client->name, $request->input('name')) != 0 || strcmp($client->surname, $request->input('surname')) != 0) {
                 return redirect()->back()->withErrors(['error' => 'Given data does not match our records. Check if your data is correct.']);
             }
             $clientId = $client->id;

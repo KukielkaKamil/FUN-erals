@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('surname')->nullable(false);
-            $table->string('phone_number',9);
+            $table->string('phone_number', 9);
             $table->decimal('salary');
         });
     }

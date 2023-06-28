@@ -10,11 +10,13 @@ class Client extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['name','surname','pesel','phone_number','email'];
-    public function funeral(): HasMany{
+    protected $fillable = ['name', 'surname', 'pesel', 'phone_number', 'email'];
+    public function funeral(): HasMany
+    {
         return $this->hasMany(Funeral::class);
     }
-    public function promoCode(): HasMany{
+    public function promoCode(): HasMany
+    {
         return $this->hasMany(PromoCode::class);
     }
 }

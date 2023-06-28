@@ -41,11 +41,11 @@ class Funeral extends Model
         }
     }
 
-    public function getEndDate($date = null) {
-        if($date == null){
-        $end = Carbon::parse($this->date);
-        }
-        else{
+    public function getEndDate($date = null)
+    {
+        if ($date == null) {
+            $end = Carbon::parse($this->date);
+        } else {
             $end = Carbon::parse($date);
         }
         $time = Carbon::createFromFormat('H:i:s', $this->offer->duration);
@@ -55,12 +55,13 @@ class Funeral extends Model
         return $end;
     }
 
-    public function isOverlaping($start1, $end1){
-        $start1=Carbon::parse($start1);
-        $end1=Carbon::parse($end1);
-        $start2=Carbon::parse($this->date);
+    public function isOverlaping($start1, $end1)
+    {
+        $start1 = Carbon::parse($start1);
+        $end1 = Carbon::parse($end1);
+        $start2 = Carbon::parse($this->date);
         $end2 = $this->getEndDate();
 
-        return($start1->lessThanOrEqualTo($end2)) && ($end1->greaterThanOrEqualTo($start2));
+        return ($start1->lessThanOrEqualTo($end2)) && ($end1->greaterThanOrEqualTo($start2));
     }
 }

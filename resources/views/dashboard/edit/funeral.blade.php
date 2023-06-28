@@ -69,8 +69,8 @@
                                         @endphp
                                         @forelse ($workers as $worker)
                                             <label class="list-group-item">
-                                                <input class="form-check-input me-1" name="workers[]"
-                                                    id="workersCheck" type="checkbox" value="{{ $worker->id }}"
+                                                <input class="form-check-input me-1" name="workers[]" id="workersCheck"
+                                                    type="checkbox" value="{{ $worker->id }}"
                                                     @if ($worker->funeral->contains($funeral->id)) checked @endif
                                                     @if ($worker->isOccupied($funeral)) onclick="return false;" @endif>
                                                 {{ $worker->name . ' ' . $worker->surname }}

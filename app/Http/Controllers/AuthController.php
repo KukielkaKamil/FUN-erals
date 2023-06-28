@@ -30,10 +30,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if(Auth::user()->id == 1){
-            return redirect()->route('dashboard.index');
-            }
-            else{
+            if (Auth::user()->id == 1) {
+                return redirect()->route('dashboard.index');
+            } else {
                 return redirect()->route('worker.index');
             }
         }

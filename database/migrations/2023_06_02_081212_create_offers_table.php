@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('name',80)->nullable(false);
+            $table->string('name', 80)->nullable(false);
             $table->text('description');
             $table->time('duration');
             $table->decimal('price')->nullable(false);

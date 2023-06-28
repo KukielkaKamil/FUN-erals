@@ -17,14 +17,14 @@
                         </thead>
                         <tbody>
                             @forelse ($funerals as $f)
-                                    <tr>
-                                        <th scope="row">{{ $f->id }}</th>
-                                        <td>{{ \Carbon\Carbon::parse($f->date)->format('Y-m-d') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($f->date)->format('H:i') }}</td>
-                                        <td>{{ $f->offer->name }}</td>
-                                        <td><a href={{ route('worker.client', ['id' => $f->client->id]) }}>
-                                                {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
-                                    </tr>
+                                <tr>
+                                    <th scope="row">{{ $f->id }}</th>
+                                    <td>{{ \Carbon\Carbon::parse($f->date)->format('Y-m-d') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($f->date)->format('H:i') }}</td>
+                                    <td>{{ $f->offer->name }}</td>
+                                    <td><a href={{ route('worker.client', ['id' => $f->client->id]) }}>
+                                            {{ $f->client->name . ' ' . $f->client->surname }}</a></td>
+                                </tr>
 
                             @empty
                                 <tr>

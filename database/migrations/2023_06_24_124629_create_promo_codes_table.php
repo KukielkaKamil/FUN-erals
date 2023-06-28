@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('promo_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('code',30);
-            $table->decimal('discount',3,2);
+            $table->string('code', 30);
+            $table->decimal('discount', 3, 2);
             $table->date('exp_date');
             $table->foreignIdFor(Client::class)->nullable(true)->onDelete('cascade');
         });

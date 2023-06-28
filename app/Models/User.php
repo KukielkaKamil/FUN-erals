@@ -49,23 +49,25 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function funeral(): BelongsToMany{
-        return $this->belongsToMany(Funeral::class,'funeral_user', 'user_id','funeral_id');
+    public function funeral(): BelongsToMany
+    {
+        return $this->belongsToMany(Funeral::class, 'funeral_user', 'user_id', 'funeral_id');
     }
 
-    public function isOccupied(Funeral $f,$sdate = null){
+    public function isOccupied(Funeral $f, $sdate = null)
+    {
         $sdate = $sdate ?? $f->date;
         $edate = $f->getEndDate($sdate);
-        $id= $f->id;
+        $id = $f->id;
         $funerals = $this->funeral;
         $occupied = false;
-        foreach($funerals as $funeral){
-            if($funeral->id == $id) continue;
-            if ($funeral->isOverlaping($sdate,$edate)){
+        foreach ($funerals as $funeral) {
+            if ($funeral->id == $id) continue;
+            if ($funeral->isOverlaping($sdate, $edate)) {
                 $occupied = true;
                 break;
             }
         }
         return $occupied;
-     }
+    }
 }
